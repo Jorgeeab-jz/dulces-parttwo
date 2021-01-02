@@ -32,8 +32,6 @@ function drawProductList() {
             drawProducts(content,productCategory);
          }
       }
-    
-    
 }
 
 
@@ -94,6 +92,7 @@ document.addEventListener('click', (e) => {
 } )
 modalShowBtn.addEventListener('click', function(){
     showModal(productsModal);
+    drawProductList();
 });
 modalClose.addEventListener('click', hideModal);
 productsModal.addEventListener('click',(e)=> {
