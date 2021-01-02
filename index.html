@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="container"> 
-        <div class="top">
+        <header class="top">
             <div class="logo">
                 <img class="raw-logo" src="media/Rawlogo.png" alt="Dulces Vicky">
                 <div class="logo-text">
@@ -21,7 +21,7 @@
                     <h1 class="logo-bottom">Vicky</h1>
                 </div>
             </div>
-        </div>
+        </header>
         <div class="navbar">
             <nav>
                 <ul class="nav-links">
@@ -56,31 +56,14 @@
                     <h3 class="qty">Cantidad</h3>
                 </div>
                 <hr class="legend-border">
-                <details class="section">
-                    <summary>Rollos</summary>
-                    <div class="product">
-                        <h3>Rol de Canela</h3>
-                        <h4>0.3$</h4>
-                        <div class="qty-btn">
-                            <button id="add">+</button>
-                            <button id="remove">-</button>
-                        </div>
-                    </div>
-                </details>
-            </div>
-            <div class="total-container">
-                <div class="total-display">
-                    <h1>Total:</h1>
-                    <p id="total-display"></p>
+                <div id="product-list" class="product-list">
+
                 </div>
-            </div>
-            <div class="order-submit">
-                <button id="order-submit">Enviar</button>
             </div>
         </div>
     </div>
     <div class="cart-modal">
-        
+        <div class="cart-items"></div>
     </div>
 </body>
 <!-- The core Firebase JS SDK is always required and must be listed first -->

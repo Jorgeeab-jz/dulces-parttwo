@@ -12,20 +12,66 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 const dulcesDB = firebase.database();
-const products = dulcesDB.ref().child('productos');
-let rolls = products.child('rolls');
+const productsDB = dulcesDB.ref().child('productos');
+let products = {};
 ////////////////////////////////////////////////////////////////////////////////////////
 const productsModal = document.getElementById('modal');
 const modalClose = document.querySelector('.order-builder span');
 const modalShowBtn = document.getElementById('build-order');
-const orderSubmitBtn = document.getElementById('order-submit');
-const qtyDisplay = document.getElementById('qty-display');
-const totalDisplay = document.getElementById('total-display');
-const addBtn = document.getElementById('add');
-const removeBtn = document.getElementById('remove');
 const cartBtn = document.querySelector('.shopping-container');
 const shopIcon = document.querySelector('.shopping-container i');
 const cartModal = document.querySelector('.cart-modal');
+const cartItems = document.querySelector('.cart-items');
+
+function drawProductList() {
+    for (const [key,value] of Object.entries(products)) {
+         drawCategory(`${key}`);
+         let currentProduct = value;
+         let productCategory = document.getElementById(`${key}`);
+         for (const [name,content] of Object.entries(currentProduct)) {
+            drawProducts(content,productCategory);
+         }
+      }
+    
+    
+}
+
+
+function drawCategory(productType) {
+    let productList = document.getElementById('product-list');
+    let category = document.createElement('details');
+    let title = document.createElement('summary');
+    category.append(title);
+    category.setAttribute('id',productType);
+    title.innerText = productType;
+    productList.append(category);
+}
+
+function drawProducts(product,category) {
+    let productContainer = document.createElement('div');
+    productContainer.className = 'product';
+    let productName = document.createElement('h3');
+    productName.innerText = product.name;
+    let productPrice = document.createElement('h4');
+    productPrice.innerText = product.price
+    let btnContainer = document.createElement('div');
+    btnContainer.className = 'qty-btn'
+    let addBtn = document.createElement('button');
+    addBtn.innerText = '+';
+    let lessBtn = document.createElement('button');
+    lessBtn.innerText = '-';
+    btnContainer.append(addBtn,lessBtn);
+    productContainer.append(productName,productPrice,btnContainer);
+    category.append(productContainer);
+}
+
+productsDB.once('value') //Stores the available products in an object
+  .then(function (snap) {
+    products = snap.val();
+  })
+  .catch(function (err) {
+    console.log('Error', err.code);
+});
 
 function showModal(modal) {
     modal.style.display = 'block';
@@ -54,16 +100,5 @@ productsModal.addEventListener('click',(e)=> {
     if(e.target == modal) {
         hideModal(productsModal);
     }
-})
-addBtn.addEventListener('click', ()=> {
-    qtyDisplay.value++
-    addTotal();
-})
-
-removeBtn.addEventListener('click', ()=> {
-    if(qtyDisplay.value >= 1) {
-        qtyDisplay.value--
-    }
-    addTotal();
 })
 
