@@ -8,16 +8,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Cherry+Swash&family=Raleway:wght@200&display=swap" rel="stylesheet">
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
     <title>Dulces Vicky</title>
+    <script src="https://kit.fontawesome.com/6a6f102d22.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
+    <div class="container"> 
         <div class="top">
             <div class="logo">
                 <img class="raw-logo" src="media/Rawlogo.png" alt="Dulces Vicky">
@@ -50,6 +45,9 @@
                     <h1 class="logo-bottom">Vicky</h1>
                 </div>
             </div>
+            <div class="shopping-container">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
             <hr class="logo-border">
             <div id="products-container" class="order-products">
                 <div class="legend">
@@ -58,23 +56,17 @@
                     <h3 class="qty">Cantidad</h3>
                 </div>
                 <hr class="legend-border">
-                <div class="product">
-                    <h3>Rol de Canela</h3>
-                    <h4>0.3$</h4>
-                    <div class="qty-btn">
-                        <button id="add">+</button>
-                        <button id="remove">-</button>
+                <details class="section">
+                    <summary>Rollos</summary>
+                    <div class="product">
+                        <h3>Rol de Canela</h3>
+                        <h4>0.3$</h4>
+                        <div class="qty-btn">
+                            <button id="add">+</button>
+                            <button id="remove">-</button>
+                        </div>
                     </div>
-                    <div class="qty-display">
-                        <input id="qty-display"
-                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);
-                                                 if (this.value < 0) this.value = 0;"
-                            type = "number"
-                            min="0"
-                            maxlength = "3"
-                        />
-                    </div>
-                </div>
+                </details>
             </div>
             <div class="total-container">
                 <div class="total-display">
@@ -87,6 +79,15 @@
             </div>
         </div>
     </div>
+    <div class="cart-modal">
+        
+    </div>
 </body>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+ https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
 <script src="script.js"></script>
 </html>

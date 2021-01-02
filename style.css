@@ -137,6 +137,7 @@ body {
     margin: auto;
     margin-bottom: -15px;
     display: grid;
+    width: 100%;
     grid-template-columns: repeat(3, auto);
     font-family: 'Raleway', sans-serif;
     font-size: 8px;
@@ -151,12 +152,21 @@ body {
 .order-products {
     margin-top: 20px;
 }
+.price {
+    text-align: center;
+}
 .product {
     font-family: 'Raleway', sans-serif;
     font-size: 12px;
     color: #ffeaa7;
     display: grid;
-    grid-template-columns: repeat(4,auto);
+    grid-template-columns: repeat(3,auto);
+}
+.product h4{
+    text-align: center;
+}
+.qty-btn {
+    text-align: end;
 }
 .qty-btn button {
     text-align: center;
@@ -173,15 +183,23 @@ body {
 .qty-btn button:active {
     transform: scale(0.95);
 }
-.qty-display {
-    margin: auto;
-    margin-right: -1px;
-    border-radius: 10px;
-    padding: 0%;
+.shopping-container {
+    float: right;
     width: 30px;
     height: 30px;
-    background: cornsilk;
+    color: #ffeaa7;
+    border: 2px solid #ffeaa7;
+    border-radius: 50%;
     text-align: center;
+    margin-top: -180px;
+}
+.shopping-container i {
+    margin: auto;
+    margin-top: 25%;
+    margin-left: -2px;
+}
+.shopping-container:active {
+    transform: scale(0.95);
 }
 .qty-display input {
     font-family: sans-serif;
@@ -220,4 +238,27 @@ body {
 }
 .order-submit button:active {
     transform: scale(0.95);
+}
+.section {
+    color: #ffeaa7;
+    font-family: 'Raleway', sans-serif;
+    outline-style: none;
+}
+.cart-modal {
+    display: none;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 50%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background: #8d1414;
+    box-shadow: 2px 2px 20px rgba(0,0,0,0.9);
+    animation-name: animateleft;
+    animation-duration: 0.4s
+}
+@keyframes animateleft {
+    from {left: -300px; opacity: 0;}
+    to {right: 0px; opacity: 1;}
 }

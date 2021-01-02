@@ -1,4 +1,21 @@
-const modal = document.getElementById('modal');
+const firebaseConfig = {
+    apiKey: "AIzaSyBhEEjKEDyuJQ0fXY0R3VyMvssNEffLaMI",
+    authDomain: "dulces-vicky.firebaseapp.com",
+    databaseURL: "https://dulces-vicky-default-rtdb.firebaseio.com",
+    projectId: "dulces-vicky",
+    storageBucket: "dulces-vicky.appspot.com",
+    messagingSenderId: "877270025588",
+    appId: "1:877270025588:web:f8ad1aab9cfb9106935821",
+    measurementId: "G-TE0KQKQ16F"
+  };
+  // Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+const dulcesDB = firebase.database();
+const products = dulcesDB.ref().child('productos');
+let rolls = products.child('rolls');
+////////////////////////////////////////////////////////////////////////////////////////
+const productsModal = document.getElementById('modal');
 const modalClose = document.querySelector('.order-builder span');
 const modalShowBtn = document.getElementById('build-order');
 const orderSubmitBtn = document.getElementById('order-submit');
@@ -6,14 +23,14 @@ const qtyDisplay = document.getElementById('qty-display');
 const totalDisplay = document.getElementById('total-display');
 const addBtn = document.getElementById('add');
 const removeBtn = document.getElementById('remove');
-const rdc = {
-    name: 'Rol de Canela',
-    price: 0.3,
-}
-function showModal() {
+const cartBtn = document.querySelector('.shopping-container');
+const shopIcon = document.querySelector('.shopping-container i');
+const cartModal = document.querySelector('.cart-modal');
+
+function showModal(modal) {
     modal.style.display = 'block';
 }
-function hideModal() {
+function hideModal(modal) {
     modal.style.display = 'none';
 }
 function addTotal() {
@@ -21,19 +38,21 @@ function addTotal() {
     totalDisplay.textContent = `${(Math.round(total * 10) / 10)}$`;
 }
 
-function sendOrder() {
-    let total = totalDisplay.textContent.slice(0,-1);
-    if (total > 0) {
-        let message = `Pedido:\n${qtyDisplay.value} ${rdc.name}\nTotal: ${total}$`;
-        window.open(`https://wa.me/584121822719?text=${encodeURIComponent(message)}`);
+cartBtn.addEventListener('click', function(){
+    showModal(cartModal);
+})
+document.addEventListener('click', (e) => {
+    if(e.target !== cartModal && e.target !== cartBtn && e.target !== shopIcon){
+        hideModal(cartModal);
     }
-}
-
-modalShowBtn.addEventListener('click', showModal);
+} )
+modalShowBtn.addEventListener('click', function(){
+    showModal(productsModal);
+});
 modalClose.addEventListener('click', hideModal);
-modal.addEventListener('click',(e)=> {
+productsModal.addEventListener('click',(e)=> {
     if(e.target == modal) {
-        hideModal();
+        hideModal(productsModal);
     }
 })
 addBtn.addEventListener('click', ()=> {
@@ -48,4 +67,3 @@ removeBtn.addEventListener('click', ()=> {
     addTotal();
 })
 
-orderSubmitBtn.addEventListener('click', sendOrder);
