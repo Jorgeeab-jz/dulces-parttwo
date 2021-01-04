@@ -350,6 +350,26 @@ body {
 }
 
 .total-display {
-    margin-left: -50%;
+    text-align: end;
+    margin-right: 10%;
     margin-top: 25px;
+}
+.send-container {
+    margin: auto;
+    text-align: center;
+}
+.send-container button {
+    margin: auto;
+    background: none;
+    color: #ffeaa7;
+    outline-style: none;
+    border: 2px solid #ffeaa7;
+    border-radius: 10px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    width: 95px;
+    height: 40px;
+}
+.send-container button:active {
+    transform: scale(0.9);
 }

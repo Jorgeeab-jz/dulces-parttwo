@@ -23,6 +23,8 @@ const shopIcon = document.querySelector('.shopping-container i');
 const cartModal = document.querySelector('.cart-modal');
 const cartItems = document.querySelector('.cart-items');
 let addBtn = document.querySelectorAll('.add');
+let message = '';
+let total = 0;
 
 productsDB.once('value') //Stores the available products in an object
   .then(function (snap) {
@@ -94,6 +96,7 @@ function drawProducts(product,category) {
             }else{
                 if (product.dataset.price !== undefined) {
                     addCartItem(product);
+                    updateOrder()
                 }
             }
         }
@@ -154,6 +157,7 @@ function addCartItem(item) {
         let buttonClicked = e.target.parentElement;
         buttonClicked.remove();
         updateTotal();
+        updateOrder()
     })
     
     cartItemContainer.append(qty,itemName,removeBtn);
@@ -173,12 +177,12 @@ function quantityChanged(event) {
         input.value = 99
     }
     updateTotal();
+    updateOrder();
 }
 
 function updateTotal() {
     let items = document.querySelectorAll('.item');
-    let total = 0;
-
+    
     items.forEach(item => {
         let qty = Number(item.querySelector('input').value);
         let price = Number(item.dataset.price);
@@ -189,6 +193,33 @@ function updateTotal() {
     document.querySelector('.total-display').innerText = `${total}$`;
 }
 
+function updateOrder() {
+    let items = [...document.querySelectorAll('.item')];
+ 
+    let order = items.map(item =>{
+        let itemQty = item.querySelector('input').value;
+        let itemName = item.querySelector('p').innerText;
+        let itemOrder = {
+            qty: itemQty,
+            name: itemName
+        }
+        return itemOrder;
+    },[])
+
+    let orderMessage = order.map(item =>{
+        let line = `\n${item.qty} ${item.name}`;
+        return line;
+    },'')
+    
+    message = `Pedido:${orderMessage}\nTOTAL: ${total}$`;
+}
+
+function sendOrder() {
+    let orderMessage = encodeURI(message);
+    if (total > 0) {
+        window.open(`https://wa.me/584121822719?text=${orderMessage}`);
+    }
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 cartBtn.addEventListener('click', function(){
     showModal(cartModal);
@@ -202,8 +233,11 @@ modalShowBtn.addEventListener('click', function(){
     showModal(productsModal);
 });
 modalClose.addEventListener('click', hideModal);
+
 productsModal.addEventListener('click',(e)=> {
     if(e.target == modal) {
         hideModal(productsModal);
     }
 })
+
+document.getElementById('send').addEventListener('click',sendOrder);
