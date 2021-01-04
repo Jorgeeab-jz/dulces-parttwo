@@ -61,6 +61,8 @@ function drawProducts(product,category) {
     productContainer.className = 'product';
     
     productContainer.dataset.id = product.id;
+
+    productContainer.dataset.price= product.price;
     
     let productName = document.createElement('h3');
     
@@ -90,7 +92,9 @@ function drawProducts(product,category) {
                     return;
                 }
             }else{
-                addCartItem(product);
+                if (product.dataset.price !== undefined) {
+                    addCartItem(product);
+                }
             }
         }
     })
@@ -121,6 +125,8 @@ function addCartItem(item) {
     cartItemContainer.className = 'item';
     
     cartItemContainer.dataset.id = item.dataset.id;
+
+    cartItemContainer.dataset.price = item.dataset.price;
     
     let itemName = document.createElement('p');
     
@@ -147,6 +153,7 @@ function addCartItem(item) {
     removeBtn.addEventListener('click', (e)=> {
         let buttonClicked = e.target.parentElement;
         buttonClicked.remove();
+        updateTotal();
     })
     
     cartItemContainer.append(qty,itemName,removeBtn);
@@ -154,6 +161,8 @@ function addCartItem(item) {
     cartItems.append(cartItemContainer);
 
     items = document.querySelectorAll('.item');
+
+    updateTotal();
 }
 
 function quantityChanged(event) {
@@ -163,7 +172,23 @@ function quantityChanged(event) {
     }else if(input.value > 99) {
         input.value = 99
     }
+    updateTotal();
 }
+
+function updateTotal() {
+    let items = document.querySelectorAll('.item');
+    let total = 0;
+
+    items.forEach(item => {
+        let qty = Number(item.querySelector('input').value);
+        let price = Number(item.dataset.price);
+        let itemTotal = qty * price;
+        total += itemTotal;
+    })
+    total = Math.round(total * 10) / 10;
+    document.querySelector('.total-display').innerText = `${total}$`;
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 cartBtn.addEventListener('click', function(){
     showModal(cartModal);
