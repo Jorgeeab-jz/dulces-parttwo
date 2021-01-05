@@ -109,7 +109,7 @@ body {
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     animation-name: animatetop;
-    animation-duration: 0.4s
+    animation-duration: 0.4s;
 }
 @keyframes animatetop {
     from {top: -300px; opacity: 0}
@@ -120,6 +120,7 @@ body {
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     width: 80%; /* Could be more or less, depending on screen size */
+    border-radius: 20px;
 }
 .order-builder span {
     color: #ffeaa7;
@@ -237,7 +238,8 @@ body {
     background: #8d1414;
     box-shadow: 2px 2px 30px rgba(0,0,0,0.8);
     animation-name: animateleft;
-    animation-duration: 0.4s
+    animation-duration: 0.4s;
+    border-radius: 20px;
 }
 .cart-modal hr {
     width: 60%;
@@ -372,4 +374,16 @@ body {
 }
 .send-container button:active {
     transform: scale(0.9);
+}
+
+.logo-text-cart {
+    margin: auto;
+    text-align: center;
+    font-family: 'Berkshire Swash', cursive;
+    color: #ffeaa7;
+    margin-bottom: -40px;
+    height: 20px;
+}
+.logo-text-cart h1 {
+    margin-top: -25px;
 }
