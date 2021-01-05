@@ -16,13 +16,9 @@ const productsDB = dulcesDB.ref().child('productos');
 let products = {};
 ////////////////////////////////////////////////////////////////////////////////////////
 const productsModal = document.getElementById('modal');
-const modalClose = document.querySelector('.order-builder span');
-const modalShowBtn = document.getElementById('build-order');
-const cartBtn = document.querySelector('.shopping-container');
-const shopIcon = document.querySelector('.shopping-container i');
 const cartModal = document.querySelector('.cart-modal');
 const cartItems = document.querySelector('.cart-items');
-let addBtn = document.querySelectorAll('.add');
+let addBtn;
 let message = '';
 let total = 0;
 
@@ -96,7 +92,9 @@ function drawProducts(product,category) {
             }else{
                 if (product.dataset.price !== undefined) {
                     addCartItem(product);
-                    updateOrder()
+                    updateOrder();
+                    animateCSS('.shopping-container', 'swing');
+                    turnCartOn();
                 }
             }
         }
@@ -158,7 +156,6 @@ function addCartItem(item) {
         buttonClicked.remove();
         updateTotal();
         updateOrder();
-        
     })
     
     cartItemContainer.append(qty,itemName,removeBtn);
@@ -191,6 +188,9 @@ function updateTotal() {
         total += itemTotal;
     })
     total = Math.round(total * 10) / 10;
+    if(total == 0){
+        turnCartOff();
+    }
     document.querySelector('.total-display').innerText = `${total}$`;
 }
 
@@ -222,23 +222,5 @@ function sendOrder() {
     }
 }
 //////////////////////////////////////////////////////////////////////////////////////////
-cartBtn.addEventListener('click', function(){
-    showModal(cartModal);
-})
-
-document.getElementById('close-cart').addEventListener('click', ()=>{
-    hideModal(cartModal)
-});
-
-modalShowBtn.addEventListener('click', function(){
-    showModal(productsModal);
-});
-modalClose.addEventListener('click', hideModal);
-
-productsModal.addEventListener('click',(e)=> {
-    if(e.target == modal) {
-        hideModal(productsModal);
-    }
-})
 
 document.getElementById('send').addEventListener('click',sendOrder);

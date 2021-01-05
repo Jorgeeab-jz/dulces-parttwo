@@ -72,22 +72,25 @@ body {
     display: inline-block;
 }
 .make-order {
+    position: absolute;
+    left: 25vw;
+    bottom: 5vh;
     margin: auto;
     margin-top: 15px;
     text-align: center;
 }
 .order-btn {
     font-family: 'Raleway', sans-serif;
-    font-size: 17px;
+    font-size: 25px;
     color: #ffeaa7;
-    font-weight: bolder;
+    font-weight: 500;
     margin: auto;
     border-radius: 20px;
     border: none;
     outline-style: none;
     background: #d63031;
-    width: 120px;
-    height: 50px;
+    width: 200px;
+    height: 80px;
     box-shadow: 3px 3px 3px  rgba(207, 86, 86, 0.753);
 }
 
@@ -142,7 +145,7 @@ body {
     width: 100%;
     grid-template-columns: repeat(2, auto);
     font-family: 'Raleway', sans-serif;
-    font-size: 8px;
+    font-size: 10px;
     color: #ffeaa7;
 }
 .qty{
@@ -201,18 +204,34 @@ body {
 }
 .shopping-container {
     float: right;
-    width: 30px;
-    height: 30px;
+    width: 60px;
+    height: 60px;
     color: #ffeaa7;
-    border: 2px solid #ffeaa7;
+    border: 4px solid #ffeaa7;
     border-radius: 50%;
     text-align: center;
     margin-top: -180px;
+    
+}
+.shop-active{
+    box-shadow: 0px 0px 20px#ffc7c7;
+}
+.cart-active{
+    text-shadow: 0px 0px 20px#ffc7c7;
+}
+#modal-close{
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #ffeaa7;
 }
 .shopping-container i {
+    font-size: 32px;
     margin: auto;
     margin-top: 25%;
-    margin-left: -2px;
+    margin-left: -4px;
+ 
+    
 }
 .shopping-container:active {
     transform: scale(0.95);
@@ -295,7 +314,7 @@ body {
     right: 10px;
     margin-top: 10px;
     background: none;
-    border: 2px solid #ffeaa7;
+    border: none;
     border-radius: 50%;
     outline-style: none;
     font-family: 'Raleway', sans-serif;
@@ -307,7 +326,7 @@ body {
     transform: scale(0.9);
 }
 .close-cart{
-
+    margin-right: 90px;
 }
 .close-cart button {
     background: none;
@@ -315,9 +334,9 @@ body {
     outline-style: none;
     color: #ffeaa7;
     font-size: 40px;
-    position: relative;
-    right: -230px;
-    top: 10px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
 }
 .close-cart button:active {
     transform: scale(0.9);
@@ -328,7 +347,7 @@ body {
     height: 30px;
     margin-left: 10px;
     margin-top: 5px;
-    border: 2px solid #ffeaa7;
+    border: 1px solid #ffeaa7;
     border-radius: 5px;
     color: #ffeaa7;
     font-family: 'Raleway', sans-serif;
@@ -381,7 +400,7 @@ body {
     text-align: center;
     font-family: 'Berkshire Swash', cursive;
     color: #ffeaa7;
-    margin-bottom: -40px;
+    margin-bottom: -10px;
     height: 20px;
 }
 .logo-text-cart h1 {
