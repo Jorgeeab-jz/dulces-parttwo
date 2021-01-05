@@ -90,7 +90,7 @@ function drawProducts(product,category) {
             let product = (e.target).parentElement.parentElement.parentElement;
             if (items[i] !== undefined) {
                 if (items[i].dataset.id == product.dataset.id) {
-                    alert('This item is already added to the cart')
+                    alert('Esto ya está en el carrito');
                     return;
                 }
             }else{
@@ -157,7 +157,8 @@ function addCartItem(item) {
         let buttonClicked = e.target.parentElement;
         buttonClicked.remove();
         updateTotal();
-        updateOrder()
+        updateOrder();
+        
     })
     
     cartItemContainer.append(qty,itemName,removeBtn);
@@ -182,7 +183,7 @@ function quantityChanged(event) {
 
 function updateTotal() {
     let items = document.querySelectorAll('.item');
-    
+    total = 0;
     items.forEach(item => {
         let qty = Number(item.querySelector('input').value);
         let price = Number(item.dataset.price);
